@@ -6,15 +6,15 @@ export const checkUser = async () => {
   if (!user) {
     return null;
   }
-
+  console.log("user", user.id);
   const dbUser = await db.user.findUnique({
-    where: { id: user.id },
+    where: { clerkUserId: user.id },
   });
-
+  console.log("dbUser", dbUser);
   if (dbUser) {
     return dbUser;
   }
-
+  console.log("user not found in db");
   const newUser = await db.user.create({
     data: {
       clerkUserId: user.id,
